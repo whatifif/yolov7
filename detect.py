@@ -128,9 +128,9 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         #----------------------------------------
                         # plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
-                        print(131, 'xyxy', xyxy)
-                        plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
-                # plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
+                        # print(131, 'xyxy', xyxy)
+                        plot_one_box(xyxy, im0, label=label, color=[random.randint(0,255), random.randint(0,255), random.randint(0,255)], line_thickness=1)
+                #plot_one_box([10, 10, 30, 30], im0, label=f'counts: {len(det)}', color=[0, 0, 0], line_thickness=1)
                 #================================================
             # Print time (inference + NMS)
             print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
@@ -141,6 +141,7 @@ def detect(save_img=False):
                 cv2.waitKey(1)  # 1 millisecond
 
             # Save results (image with detections)
+            cv2.putText(img=im0, text= "COTS: "+str(len(det)), org=(25, 50), fontFace=cv2.FONT_HERSHEY_TRIPLEX, fontScale=1, color=(0, 0, 0),thickness=3)
             if save_img:
                 if dataset.mode == 'image':
                     cv2.imwrite(save_path, im0)
