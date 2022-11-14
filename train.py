@@ -485,7 +485,7 @@ def train(hyp, opt, device, tb_writer=None):
         if plots:
             plot_results(save_dir=save_dir)  # save as results.png
             if wandb_logger.wandb:
-                files = ['results.png', 'confusion_matrix.png', *[f'{x}_curve.png' for x in ('F1', 'PR', 'P', 'R')]]
+                files = ['results.png', 'confusion_matrix.png', *[f'{x}_curve.png' for x in ('F2', 'PR', 'P', 'R')]]
                 wandb_logger.log({"Results": [wandb_logger.wandb.Image(str(save_dir / f), caption=f) for f in files
                                               if (save_dir / f).exists()]})
         # Test best.pt
@@ -502,7 +502,8 @@ def train(hyp, opt, device, tb_writer=None):
                                           dataloader=testloader,
                                           save_dir=save_dir,
                                           save_json=True,
-                                          plots=False,
+                                        #   plots=False,
+                                          plots=True,
                                           is_coco=is_coco,
                                           v5_metric=opt.v5_metric)
 
